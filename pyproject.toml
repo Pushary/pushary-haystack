@@ -1,0 +1,23 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pushary-haystack"
+version = "0.1.0"
+description = "Customer phone approvals and one-use execution permits for Haystack components."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [{ name = "Pushary", email = "business@pushary.com" }]
+keywords = ["haystack", "human-in-the-loop", "approvals", "ai-agents"]
+dependencies = ["pushary>=2.1.1,<3", "haystack-ai>=3.1,<4"]
+
+[project.urls]
+Homepage = "https://pushary.com"
+Repository = "https://github.com/Pushary/pushary-haystack"
+Documentation = "https://github.com/Pushary/pushary-haystack#readme"
+Issues = "https://github.com/Pushary/pushary-haystack/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pushary_haystack"]
