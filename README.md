@@ -7,11 +7,10 @@ permits. This package is maintained by Pushary and licensed under MIT.
 
 ## Install
 
-Python 3.10+; tested with Haystack 3.1.1 and Pushary 2.1.1. The initial release is
-installable from GitHub; it is not currently published on PyPI.
+Python 3.10+; tested with Haystack 3.1.1 and Pushary 2.1.1. Install the package from PyPI:
 
 ```sh
-pip install 'pushary-haystack @ git+https://github.com/Pushary/pushary-haystack.git@v0.1.0'
+pip install pushary-haystack==0.1.0
 ```
 
 ## Customer phone approval
