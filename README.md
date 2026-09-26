@@ -1,25 +1,21 @@
-# Pushary for Haystack
+# pushary-haystack
 
-Ask your customer to approve an order on their phone before a Haystack component
-executes the action. `PusharyProtectedAction` uses the existing [Pushary Python
-SDK](https://github.com/Pushary/pushary-python) for delivery and one-use execution
-permits. This package is maintained by Pushary and licensed under MIT.
+Phone approvals for Haystack agents. Your agent asks, your user taps Approve or Deny.
 
-## Install
+[Published on PyPI](https://pypi.org/project/pushary-haystack/) · [Integration guide](https://pushary.com/docs/agents/adapters?utm_source=github&utm_medium=oss-adapter&utm_campaign=pushary-haystack&utm_content=readme)
 
-Python 3.10+; tested with Haystack 3.1.1 and Pushary 2.1.1. Install the package from PyPI:
+## What you need
+
+- A Pushary Partner plan, from $99 a month. [Start the trial](https://pushary.com/sign-up?from=agent&plan=partner&utm_source=github&utm_medium=oss-adapter&utm_campaign=pushary-haystack&utm_content=partner-start).
+- An API key from [Partner onboarding](https://pushary.com/onboarding/partner), set as `PUSHARY_API_KEY`.
+- Your users install the free Pushary app ([iPhone](https://apps.apple.com/us/app/pushary/id6785677563), [Android](https://play.google.com/store/apps/details?id=com.pushary.app)). They never sign up or pay.
+
+## Quick start
 
 ```sh
 pip install pushary-haystack==0.1.0
+export PUSHARY_API_KEY=pk_xxx.sk_xxx
 ```
-
-## Customer phone approval
-
-You need a [Pushary Partner account](https://pushary.com/sign-up?from=agent&plan=partner&utm_source=github&utm_medium=oss-adapter&utm_campaign=pushary-haystack&utm_content=partner-start)
-and a customer enrolled through your application's `client.enroll(external_id)`
-flow. Keep the full API key on the server in `PUSHARY_API_KEY`.
-Use a key for the authenticated tenant, preferably bound to the customer. Never
-let a model select tenant, recipient, handler, run ID, call ID, or deadline.
 
 ```python
 import time
@@ -45,11 +41,26 @@ print(pipeline.run({"approve": {"parameters": {
 }}}))
 ```
 
-The action runs inside the component, after approval and successful permit
-consumption. Success emits `result`; a refusal emits only `blocked`. Connect
+The action runs inside the component, only after your customer approves. Success
+emits `result`; a no, or no answer, emits only `blocked`. Connect
 `approve.result` to downstream reporting components. Do not expose an alternative
 ungated action tool: this component protects its registered handler, not every
 tool or component in an arbitrary agent.
+
+Haystack's own docs: [Human in the Loop](https://docs.haystack.deepset.ai/docs/human-in-the-loop).
+
+## Setup and safety
+
+Ask your customer to approve an order on their phone before a Haystack component
+executes the action. `PusharyProtectedAction` uses the existing [Pushary Python
+SDK](https://github.com/Pushary/pushary-python) for delivery and one-use execution
+permits. This package is maintained by Pushary and licensed under MIT.
+
+You need a [Pushary Partner account](https://pushary.com/sign-up?from=agent&plan=partner&utm_source=github&utm_medium=oss-adapter&utm_campaign=pushary-haystack&utm_content=partner-start)
+and a customer enrolled through your application's `client.enroll(external_id)`
+flow. Keep the full API key on the server in `PUSHARY_API_KEY`.
+Use a key for the authenticated tenant, preferably bound to the customer. Never
+let a model select tenant, recipient, handler, run ID, call ID, or deadline.
 
 To expose it to a Haystack Agent, wrap the configured component with the native
 `ComponentTool`. Its tool schema exposes only `parameters`; recipient and other
@@ -67,7 +78,7 @@ protected_tool = ComponentTool(
 Create a separate component instance for the tool: Haystack does not allow a
 component already owned by a pipeline to be wrapped as a `ComponentTool`.
 
-Parameters must be 1–31 flat scalar facts, with keys up to 64 characters and
+Parameters must be 1-31 flat scalar facts, with keys up to 64 characters and
 string values up to 200. The full action question must fit 500 characters.
 Nested data, nonfinite numbers, oversized questions, and the reserved
 `pushary_binding` key are rejected rather than silently omitted. Include every
@@ -145,3 +156,7 @@ It does not claim live phone delivery was tested. CI repeats it on Python 3.10,
 3.12 and 3.13.
 
 Questions or bugs: [GitHub issues](https://github.com/Pushary/pushary-haystack/issues).
+
+## Runtime requirements
+
+Python 3.10+; tested with Haystack 3.1.1 and Pushary 2.1.1.
