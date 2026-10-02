@@ -13,7 +13,7 @@ Phone approvals for Haystack agents. Your agent asks, your user taps Approve or 
 ## Quick start
 
 ```sh
-pip install pushary-haystack==0.1.0
+pip install pushary-haystack==0.1.1
 export PUSHARY_API_KEY=pk_xxx.sk_xxx
 ```
 
