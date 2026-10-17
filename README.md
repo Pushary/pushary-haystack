@@ -108,9 +108,10 @@ and dependencies; a code change requires a new revision and fresh approval.
 Clone the repository to run the complete local-order demonstration:
 
 ```sh
-git clone --branch v0.1.0 https://github.com/Pushary/pushary-haystack.git
+git clone https://github.com/Pushary/pushary-haystack.git
 cd pushary-haystack
-pip install .
+git checkout 8072ab8f4c61d856dd75209108a7bfbc6afa09ef
+pip install pushary-haystack==0.1.1
 # Export PUSHARY_API_KEY securely, then use an enrolled test customer's ID.
 python examples/order_approval.py start YOUR_TEST_CUSTOMER_ID
 # The process exits. Answer on the customer's phone, then start a new process:
