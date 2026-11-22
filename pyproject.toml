@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pushary-haystack"
-version = "0.1.1"
+version = "0.1.2"
 description = "Phone approvals for Haystack agents. Your agent asks, your user taps Approve or Deny."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -14,9 +14,9 @@ keywords = ["haystack", "human-in-the-loop", "approvals", "ai-agents", "approval
 dependencies = ["pushary>=2.1.1,<3", "haystack-ai>=3.1,<4"]
 
 [project.urls]
-Homepage = "https://pushary.com"
+Homepage = "https://pushary.com/docs/agents/build/quickstart"
 Repository = "https://github.com/Pushary/pushary-haystack"
-Documentation = "https://github.com/Pushary/pushary-haystack#readme"
+Documentation = "https://pushary.com/docs/agents/adapters"
 Issues = "https://github.com/Pushary/pushary-haystack/issues"
 
 [tool.hatch.build.targets.wheel]

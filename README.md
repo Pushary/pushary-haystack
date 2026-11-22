@@ -2,7 +2,7 @@
 
 Phone approvals for Haystack agents. Your agent asks, your user taps Approve or Deny.
 
-[Published on PyPI](https://pypi.org/project/pushary-haystack/) · [Integration guide](https://pushary.com/docs/agents/adapters?utm_source=github&utm_medium=oss-adapter&utm_campaign=pushary-haystack&utm_content=readme)
+[Published on PyPI](https://pypi.org/project/pushary-haystack/) · [Integration guide](https://pushary.com/docs/agents/adapters?utm_source=github&utm_medium=oss-adapter&utm_campaign=pushary-haystack&utm_content=readme#protect-one-action-with-protect)
 
 ## What you need
 
@@ -10,10 +10,18 @@ Phone approvals for Haystack agents. Your agent asks, your user taps Approve or 
 - An API key from [Partner onboarding](https://pushary.com/onboarding/partner?utm_source=github&utm_medium=oss-adapter&utm_campaign=pushary-haystack&utm_content=partner-start), set as `PUSHARY_API_KEY`.
 - Your users install the free Pushary app ([iPhone](https://apps.apple.com/us/app/pushary/id6785677563), [Android](https://play.google.com/store/apps/details?id=com.pushary.app)). They never sign up or pay.
 
+## What your customer gets
+
+1. They open your connect link once. It shows your product's name and logo and connects their phone.
+2. When the pipeline reaches the protected action, a push notification titled with your product name arrives, such as **Acme needs your approval**. The question names the action, its target and every parameter you pass.
+3. They tap Approve or Deny. The action runs only after a yes, and at most once for that approval. A no, or no answer, runs nothing.
+
+Pushary hosts the phone delivery, the decision record, the one-use execution permit and the [audit log](https://pushary.com/docs/agents/audit-log?utm_source=github&utm_medium=oss-adapter&utm_campaign=pushary-haystack&utm_content=readme). Your app keeps its own sign-in, the saved pipeline and operation, and the handler that does the work.
+
 ## Quick start
 
 ```sh
-pip install pushary-haystack==0.1.1
+pip install pushary-haystack==0.1.2
 export PUSHARY_API_KEY=pk_xxx.sk_xxx
 ```
 
@@ -111,7 +119,7 @@ Clone the repository to run the complete local-order demonstration:
 git clone https://github.com/Pushary/pushary-haystack.git
 cd pushary-haystack
 git checkout 8072ab8f4c61d856dd75209108a7bfbc6afa09ef
-pip install pushary-haystack==0.1.1
+pip install pushary-haystack==0.1.2
 # Export PUSHARY_API_KEY securely, then use an enrolled test customer's ID.
 python examples/order_approval.py start YOUR_TEST_CUSTOMER_ID
 # The process exits. Answer on the customer's phone, then start a new process:
@@ -161,3 +169,11 @@ Questions or bugs: [GitHub issues](https://github.com/Pushary/pushary-haystack/i
 ## Runtime requirements
 
 Python 3.10+; tested with Haystack 3.1.1 and Pushary 2.1.1.
+
+## Links
+
+- [Human in the loop for AI agents](https://pushary.com/human-in-the-loop?utm_source=github&utm_medium=oss-adapter&utm_campaign=pushary-haystack&utm_content=readme), with one page per framework.
+- [Protected actions guide](https://pushary.com/docs/agents/adapters?utm_source=github&utm_medium=oss-adapter&utm_campaign=pushary-haystack&utm_content=readme#protect-one-action-with-protect) in the Pushary docs.
+- [Partner plan](https://pushary.com/partners?utm_source=github&utm_medium=oss-adapter&utm_campaign=pushary-haystack&utm_content=readme), from $99 a month. All plans are on the [pricing page](https://pushary.com/pricing?utm_source=github&utm_medium=oss-adapter&utm_campaign=pushary-haystack&utm_content=readme).
+- [Browser demo](https://pushary.com/try?utm_source=github&utm_medium=oss-adapter&utm_campaign=pushary-haystack&utm_content=readme) of one approval.
+- Related: the [Python SDK](https://github.com/Pushary/pushary-python) this package uses, and the [Pydantic AI](https://github.com/Pushary/pushary-pydantic-ai) and [CrewAI](https://github.com/Pushary/pushary-crewai) adapters.
